@@ -37,7 +37,7 @@ public class Main {
         int coreTwo = Integer.parseInt(twoCor.substring(1));
         int division = coreTwo - coreOne;
         if (oneCor.charAt(0) == twoCor.charAt(0)) {
-                for (int j = coreOne; j < division; j++) {
+                for (int j = coreOne; j < coreTwo; j++) {
                     coordinates[0][0] = "";
                     coordinates[/*there should be an letter row to write "O" there */][j] = shipPart;
                 }
