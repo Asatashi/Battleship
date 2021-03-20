@@ -14,8 +14,31 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) {
+    public static void addShip(String[][] coordinates, String shipPart) {
         Scanner scanner = new Scanner(System.in);
+        String oneCor = scanner.next();     //input the coordinates of ship
+        String twoCor = scanner.next();
+        int coreOne = Integer.parseInt(oneCor.substring(1));        //transforming second letter input which is number into int
+        int coreTwo = Integer.parseInt(twoCor.substring(1));
+        char oneCoreChar = oneCor.charAt(0);
+        int corLetterRow = 0;
+        char[] chars = new char[] {',','A','B','C','D','E','F','G','H','I','J'};
+        System.out.println(chars);
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == oneCoreChar) {
+                corLetterRow = i;
+            }
+        }
+        if (oneCor.charAt(0) == twoCor.charAt(0)) {
+            for (int j = coreOne; j < coreTwo + 1; j++) {
+                coordinates[0][0] = "";
+                coordinates[corLetterRow][j] = shipPart;
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
         String[][] coordinates = new String[11][11];
         String s = "~";
         String shipPart = "O";
@@ -30,18 +53,9 @@ public class Main {
             }
         }
         display(coordinates);
+        // write an if statement to check if user input ship is 5 blocks long
         System.out.println("Enter the coordinates of the Aircraft Carrier (5 cells):");
-        String oneCor = scanner.next();
-        String twoCor = scanner.next();
-        int coreOne = Integer.parseInt(oneCor.substring(1));
-        int coreTwo = Integer.parseInt(twoCor.substring(1));
-        int division = coreTwo - coreOne;
-        if (oneCor.charAt(0) == twoCor.charAt(0)) {
-                for (int j = coreOne; j < coreTwo; j++) {
-                    coordinates[0][0] = "";
-                    coordinates[/*there should be an letter row to write "O" there */][j] = shipPart;
-                }
-        }
+        addShip(coordinates,shipPart);
         display(coordinates);
     }
 }
