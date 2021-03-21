@@ -1,5 +1,4 @@
 package battleship;
-
 import java.util.Scanner;
 
 
@@ -16,27 +15,33 @@ public class Main {
 
     public static void addShip(String[][] coordinates, String shipPart) {
         Scanner scanner = new Scanner(System.in);
-        String oneCor = scanner.next();     //input the coordinates of ship
-        String twoCor = scanner.next();
+        String oneCor = scanner.next().toUpperCase();     //input the coordinates of ship
+        String twoCor = scanner.next().toUpperCase();
         int coreOne = Integer.parseInt(oneCor.substring(1));        //transforming second letter input which is number into int
         int coreTwo = Integer.parseInt(twoCor.substring(1));
         char oneCoreChar = oneCor.charAt(0);
+        char twoCoreChar = twoCor.charAt(0);
+//        int divisionInt = coreTwo - coreOne;
+        int divisionChar = twoCoreChar - oneCoreChar;
         int corLetterRow = 0;
-        char[] chars = new char[] {',','A','B','C','D','E','F','G','H','I','J'};
-        System.out.println(chars);
+        char[] chars = new char[]{',', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'};
         for (int i = 0; i < chars.length; i++) {
             if (chars[i] == oneCoreChar) {
                 corLetterRow = i;
             }
         }
-        if (oneCor.charAt(0) == twoCor.charAt(0)) {
-            for (int j = coreOne; j < coreTwo + 1; j++) {
-                coordinates[0][0] = "";
-                coordinates[corLetterRow][j] = shipPart;
+            if (oneCor.charAt(0) == twoCor.charAt(0)) {     //both logic on putting ships are working, now i need to check if input is in  correct length
+                for (int j = coreOne; j < coreTwo + 1; j++) {
+                    coordinates[0][0] = "";
+                    coordinates[corLetterRow][j] = shipPart;
+                }
+            } else {
+                for (int j = oneCoreChar - 64; j < divisionChar + 2; j++) {
+                    coordinates[0][0] = "";
+                    coordinates[j][coreOne] = shipPart;
+                }
             }
         }
-
-    }
 
     public static void main(String[] args) {
         String[][] coordinates = new String[11][11];
@@ -55,7 +60,19 @@ public class Main {
         display(coordinates);
         // write an if statement to check if user input ship is 5 blocks long
         System.out.println("Enter the coordinates of the Aircraft Carrier (5 cells):");
-        addShip(coordinates,shipPart);
-        display(coordinates);
+            addShip(coordinates, shipPart);
+            display(coordinates);
+        System.out.println("Enter the coordinates of the Battleship (4 cells):");
+            addShip(coordinates,shipPart);
+            display(coordinates);
+        System.out.println("Enter the coordinates of the Submarine (3 cells):");
+            addShip(coordinates,shipPart);
+            display(coordinates);
+        System.out.println("Enter the coordinates of the Cruiser (3 cells):");
+            addShip(coordinates,shipPart);
+            display(coordinates);
+        System.out.println("Enter the coordinates of the Destroyer (2 cells):");
+            addShip(coordinates,shipPart);
+            display(coordinates);
     }
 }
